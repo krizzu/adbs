@@ -1,0 +1,36 @@
+{
+  "name": "adbs",
+  "version": "0.0.1",
+  "description": "Seamless work with adb for multiple android devices.",
+  "scripts": {
+    "test": "eslint src && jest"
+  },
+  "engines": {
+    "node": ">=6.4.0"
+  },
+  "bin": {
+    "adbs": "cli.js"
+  },
+  "author": "Krzysztof Borowy <krzysztoff.borowy@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "execa": "^0.8.0",
+    "get-stream": "^3.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.13.1",
+    "eslint-config-callstack-io": "^1.0.1",
+    "jest": "^21.2.1"
+  },
+  "eslintConfig": {
+    "extends": "callstack-io",
+    "rules": {
+      "consistent-return": 0,
+      "no-console": 0
+    },
+    "globals": {
+      "jest": true
+    }
+  }
+}
