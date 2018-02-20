@@ -1,0 +1,54 @@
+version: 2
+
+defaults: &default
+  working_directory: ~/adbs
+  docker:
+    - image: circleci/node:latest
+
+
+jobs:
+  build:
+    <<: *default
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v2-deps-{{ checksum "package.json" }}
+            - v2-deps-
+      - run:
+          name: Install dependencies
+          command: yarn install
+      - save_cache:
+          key: v2-deps-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - persist_to_workspace:
+          root: .
+          paths: .
+
+  linting:
+    <<: *default
+    steps:
+      - attach_workspace:
+          at: ~/adbs
+      - run: yarn lint
+
+  unit-tests:
+    <<: *default
+    steps:
+      - attach_workspace:
+          at: ~/adbs
+      - run: yarn jest
+
+workflows:
+  version: 2
+
+  tests:
+    jobs:
+      - build
+      - linting:
+          requires:
+            - build
+      - unit-tests:
+          requires:
+            - build

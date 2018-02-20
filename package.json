@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "Seamless work with adb for multiple android devices.",
   "scripts": {
-    "test": "eslint src && jest"
+    "lint": "eslint src",
+    "test": "jest"
   },
   "engines": {
     "node": ">=6.4.0"
