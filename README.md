@@ -25,13 +25,13 @@ yarn add global adbs
 
   Options
     all       Run commands on all devices
-    all-dev   Run commands on all real devices
-    all-emu   Run commands on all running emulators
+    dev       Run commands on all real devices
+    emu       Run commands on all running emulators
     help      Displays this screen
   
   Examples
     $ adbs all shell netstat
-    $ adbs all-emu install app.apk
+    $ adbs emu install app.apk
 ```
 
 ### Note

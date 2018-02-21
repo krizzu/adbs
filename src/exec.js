@@ -8,19 +8,34 @@ const emuRegExp = /emulator/;
 
 /**
  *
+ * @param {*} stream stdio
+ * @param {string} device device name
+ */
+async function handleOutput(stream, device) {
+  console.log(
+    chalk.green(`\nDevice ${chalk.rgb(249, 200, 43)(device)} output:`)
+  );
+
+  stream.stdout.pipe(process.stdout);
+  stream.stderr.pipe(process.stderr);
+
+  return stream;
+}
+
+/**
+ *
  * @param {string[]} args arguments to adb
  */
 function execNormalAdb(args) {
-  return execa(c.adb, args)
-    .then(({ stdout }) => console.log(stdout))
-    .catch(({ stdout, stderr }) => {
-      console.log(stdout || stderr);
-    });
+  const proc = execa(c.adb, args);
+  proc.stdout.pipe(process.stdout);
+  proc.stderr.pipe(process.stderr);
+  return proc;
 }
 
 /**
  * Returns an array of list devices IDs
- * @param {string} target all | all-emu | all-dev
+ * @param {string} target all | emu | dev
  */
 function getAvailableDevices(target) {
   if (!target || !c.availableCommands.includes(target))
@@ -39,7 +54,7 @@ function getAvailableDevices(target) {
       devList.filter(dev => {
         if (target === 'all') return true;
         const isEmu = dev.match(emuRegExp);
-        return target === 'all-emu' ? isEmu : !isEmu;
+        return target === 'emu' ? isEmu : !isEmu;
       })
     )
     .catch(e => {
@@ -56,9 +71,11 @@ function getAvailableDevices(target) {
  * @param {string[]} args arguments for adb
  */
 function execAdbForDevice(deviceID, args) {
-  return execa(c.adb, ['-s', deviceID, ...args], {
+  const adbProcess = execa(c.adb, ['-s', deviceID, ...args], {
     cleanup: true,
   });
+
+  return handleOutput(adbProcess, deviceID);
 }
 
 module.exports = {
