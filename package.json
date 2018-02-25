@@ -16,8 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.3.0",
-    "execa": "^0.8.0",
-    "get-stream": "^3.0.0"
+    "execa": "^0.8.0"
   },
   "devDependencies": {
     "eslint": "^4.13.1",
@@ -28,7 +27,8 @@
     "extends": "callstack-io",
     "rules": {
       "consistent-return": 0,
-      "no-console": 0
+      "no-console": 0,
+      "no-await-in-loop": 0
     },
     "globals": {
       "jest": true

@@ -17,8 +17,12 @@ function resolveAdb(stdout = 'success', stdoutOnly = false) {
       };
 }
 
+function pipe(stream) {
+  console.log(stream);
+}
+
 function execa(cmd, args) {
-  return new Promise((resolve, reject) => {
+  const execaProcess = new Promise((resolve, reject) => {
     setImmediate(() => {
       if (cmd !== 'adb') reject(resolveAdb('Not a proper command'));
 
@@ -40,6 +44,16 @@ function execa(cmd, args) {
       resolve(resolveAdb());
     });
   });
+
+  execaProcess.stdout = {
+    pipe,
+  };
+
+  execaProcess.stderr = {
+    pipe,
+  };
+
+  return execaProcess;
 }
 
 execa.stdout = execa;
