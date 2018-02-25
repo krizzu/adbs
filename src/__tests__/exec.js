@@ -14,24 +14,30 @@ afterEach(() => {
 
 describe("exec's ", () => {
   describe('runNormalAdb', () => {
-    it('logs successfuly with proper adb args', done => {
+    it('pipes to stdio & stderr', done => {
       normalAdb(['shell']).then(() => {
         const consoleCalls = global.console.log.mock.calls;
 
         expect(consoleCalls[0].length).toEqual(1);
-        expect(consoleCalls[0][0]).toBe('success');
+        expect(consoleCalls[0][0]).toHaveProperty('_isStdio', true);
+        done();
+      });
+    });
+    it('logs successfuly with proper adb args', done => {
+      normalAdb(['shell']).then(output => {
+        expect(output).toHaveProperty('stderr', 'success');
+        expect(output).toHaveProperty('stdout', 'success');
         done();
       });
     });
 
     it('logs error when not valid command passed', done => {
-      normalAdb(['unknown']).then(() => {
-        const consoleCalls = global.console.log.mock.calls;
-
-        expect(consoleCalls[0].length).toEqual(1);
-        expect(consoleCalls[0][0]).toBe('Not a valid command');
-        done();
-      });
+      normalAdb(['unknown'])
+        .then()
+        .catch(error => {
+          expect(error).toHaveProperty('stderr', 'Not a valid command');
+          done();
+        });
     });
   });
 
@@ -52,7 +58,7 @@ describe("exec's ", () => {
       });
     });
     it('returns all emulators', done => {
-      getDevList('all-emu').then(devList => {
+      getDevList('emu').then(devList => {
         const expectedList = ['emulator-3432', 'emulator-2212'];
 
         expect(devList.length).toBe(2);
@@ -61,7 +67,7 @@ describe("exec's ", () => {
       });
     });
     it('returns all real devices', done => {
-      getDevList('all-dev').then(devList => {
+      getDevList('dev').then(devList => {
         const expectedList = ['SQRLPD135523', 'BAM35334AR', 'DEEM32AR2'];
 
         expect(devList.length).toBe(3);

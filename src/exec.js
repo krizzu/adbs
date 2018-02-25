@@ -8,7 +8,7 @@ const emuRegExp = /emulator/;
 
 /**
  *
- * @param {*} stream stdio
+ * @param {*} stream execa Promise that is a stream
  * @param {string} device device name
  */
 async function handleOutput(stream, device) {
