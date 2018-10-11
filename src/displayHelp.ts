@@ -1,5 +1,9 @@
+// To-do - update this
+
+import log from './log';
+
 function help() {
-  console.log(`
+  log.norm(`
     Usage
       $ adbs [adbs options] [adb command]
 
@@ -15,4 +19,4 @@ function help() {
 `);
 }
 
-module.exports = help;
+export default help;

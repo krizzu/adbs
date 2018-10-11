@@ -7,21 +7,25 @@
     "test": "jest"
   },
   "engines": {
-    "node": ">=6.4.0"
+    "node": ">=6.14.4"
   },
   "bin": {
     "adbs": "cli.js"
   },
-  "author": "Krzysztof Borowy <krzysztoff.borowy@gmail.com>",
+  "types": "index.d.ts",
+  "author": "Krzysztof 'Krizzu' Borowy",
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.3.0",
-    "execa": "^0.8.0"
+    "execa": "^0.8.0",
+    "inquirer": "^6.2.0"
   },
   "devDependencies": {
+    "@types/node": "^10.11.7",
     "eslint": "^4.13.1",
     "eslint-config-callstack-io": "^1.0.1",
-    "jest": "^21.2.1"
+    "jest": "^21.2.1",
+    "typescript": "^3.1.2"
   },
   "eslintConfig": {
     "extends": "callstack-io",
