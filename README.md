@@ -1,5 +1,5 @@
 
-<h1 align="center" style="font-family: monospace; color: #bbb; letter-spacing: 3px">adbs</h1>
+<h1 align="center" style="font-family: monospace; color: #bbb; letter-spacing: 3px">adbs v3</h1>
 <div align="center">
   <p align="center">
     Seamless work with multiple Android devices using <a href="https://developer.android.com/studio/command-line/adb.html"><b>android debug bridge</b></a>.
@@ -16,7 +16,7 @@ npm i -g adbs
 
 # or
 
-yarn add global adbs
+yarn global add adbs
 ```
 
 
