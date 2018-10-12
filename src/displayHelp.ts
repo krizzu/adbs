@@ -1,4 +1,4 @@
-// To-do - update this
+// To-do - update this to match v3
 
 import log from './log';
 

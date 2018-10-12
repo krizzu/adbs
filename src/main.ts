@@ -1,8 +1,3 @@
-// const command = processArgs(args);
-
-// if (command === 'help') return displayHelp();
-
-// runCmd(command);
 import processArgs from './processArgs';
 import displayHelp from './displayHelp';
 import runCmd from './runCommand';

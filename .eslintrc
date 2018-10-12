@@ -1,0 +1,7 @@
+{
+  "extends": "krizzu/ts",
+  "rules": {
+    "no-await-in-loop": 0,
+    "no-console": 0
+  }
+}

@@ -26,28 +26,28 @@ function execNormalAdb(args: Array<string>) {
 async function getAvailableDevices(target: DevTarget) {
   if (!target || !CONSTS.availableCommands.includes(target)) return [];
 
-  return execa
-    .stdout(CONSTS.adb, ['devices'])
-    .then(list =>
-      list
-        .trim()
-        .split('\n')
-        .slice(1)
-        .map(dev => dev.split('\t')[0])
-    )
-    .then(devList =>
-      devList.filter(dev => {
-        if (target === 'all') return true;
+  let devList = [];
+
+  try {
+    const rawDevList = await execa.stdout(CONSTS.adb, ['devices']);
+    devList = rawDevList
+      .trim()
+      .split('\n')
+      .slice(1)
+      .map(dev => dev.split('\t')[0])
+      .filter(dev => {
+        if (target === CONSTS.targetAll) return true;
         const isEmu = dev.match(emuRegExp);
-        return target === 'emu' ? isEmu : !isEmu;
-      })
-    )
-    .catch(e => {
-      log.norm(`
+        return target === CONSTS.targetEmu ? isEmu : !isEmu;
+      });
+  } catch (e) {
+    log.norm(`
       ${chalk.rgb(217, 21, 24)('Error while running:')}  ${e.cmd}
       ${chalk.rgb(217, 21, 24)('Error Message:')}        ${e.message}
-      `);
-    });
+    `);
+  }
+
+  return devList;
 }
 
 function execAdbForDevice(deviceID: string, args: Array<string>) {
