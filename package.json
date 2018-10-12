@@ -3,10 +3,11 @@
   "version": "2.0.0",
   "description": "Seamless work with adb for multiple android devices.",
   "scripts": {
-    "prepublishOnly": "yarn lint && yarn test && yarn cleanDist && yarn tsc",
+    "prepublishOnly": "yarn lint && yarn test && yarn build",
     "cleanDist": "rm dist/ -rf",
     "lint": "eslint src",
-    "test": "jest"
+    "test": "jest",
+    "build": "yarn cleanDist && tsc"
   },
   "engines": {
     "node": ">=6.14.4"
