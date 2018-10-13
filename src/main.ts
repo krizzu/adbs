@@ -2,9 +2,12 @@ import processArgs from './processArgs';
 import displayHelp from './displayHelp';
 import runCmd from './runCommand';
 
-const args = process.argv.slice(2);
+async function main() {
+  const args = process.argv.slice(2);
+  const command = await processArgs(args);
 
-const command = processArgs(args);
+  if (command === 'help') displayHelp();
+  else runCmd(command);
+}
 
-if (command === 'help') displayHelp();
-else runCmd(command);
+main();

@@ -9,5 +9,9 @@
     "rootDir": "./",           
     "removeComments": true,    
     "esModuleInterop": true
-  }
+  },
+  "exclude": [
+    "__mocks__",
+    "**/__tests__/*"
+  ]
 }

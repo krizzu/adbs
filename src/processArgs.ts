@@ -1,6 +1,11 @@
-import CONSTS from './consts';
+import inquirer from 'inquirer';
 
-function processArguments(args: Array<string>): 'help' | ProcessedArgs {
+import CONSTS from './consts';
+import { getDevList } from './exec';
+
+async function processArguments(
+  args: Array<string>
+): Promise<'help' | ProcessedArgs> {
   if (!args.length || /help/.test(args[0])) {
     return 'help';
   }
@@ -10,16 +15,45 @@ function processArguments(args: Array<string>): 'help' | ProcessedArgs {
     adbArgs: args,
   };
 
-  // TO-DO: use inquirier to ask for target
+  const adbArgs = getAdbArgs(args);
+  const target = await pickTarget(args)
 
-  const target = args[0];
+ 
 
-  if (CONSTS.availableCommands.includes(target)) {
-    options.target = target;
-    options.adbArgs = args.slice(1);
+  return {
+    target,
+    adbArgs
   }
+}
 
-  return options;
+function getAdbArgs(args: Array<string>): Array<string> {
+
+  // check if target is specifiec, slice commands
+  if(CONSTS.availableCommands.includes(args[0])) return args.slice(1)
+
+  return args
+}
+
+async function pickTarget(args: Array<string>) {
+  const devList = await getDevList(CONSTS.targetAll);
+
+  let target = args[0];
+
+  if (devList.length > 0) {
+    const pickTarget = {
+      type: 'list',
+      name: 'target',
+      message: 'Please select a target:',
+      default: false,
+      choices: devList,
+    };
+
+    const 
+
+    const picked = await inquirer.prompt(pickTarget);
+
+    if(picked.target)
+  }
 }
 
 export default processArguments;
