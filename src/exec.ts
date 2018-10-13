@@ -6,7 +6,7 @@ import CONSTS from './consts';
 
 const emuRegExp = /emulator/;
 
-function handleOutput(stream: ExecaStream, device: string) {
+function handleOutput(stream: ExecaStream, device: string): ExecaStream {
   const deviceName = chalk.rgb(249, 200, 43)(device);
   log.success(`\nDevice ${deviceName} output:`);
 
@@ -16,14 +16,16 @@ function handleOutput(stream: ExecaStream, device: string) {
   return stream;
 }
 
-function execNormalAdb(args: Array<string>) {
+function execNormalAdb(args: Array<string>): ExecaStream {
   const proc = execa(CONSTS.adb, args);
   proc.stdout.pipe(process.stdout);
   proc.stderr.pipe(process.stderr);
   return proc;
 }
 
-async function getAvailableDevices(target: DevTarget) {
+async function getAvailableDevices(
+  target: AvailableOptions
+): Promise<Array<string>> {
   if (!target || !CONSTS.availableCommands.includes(target)) return [];
 
   let devList = [];
@@ -50,7 +52,7 @@ async function getAvailableDevices(target: DevTarget) {
   return devList;
 }
 
-function execAdbForDevice(deviceID: string, args: Array<string>) {
+function execAdbForDevice(deviceID: string, args: Array<string>): ExecaStream {
   const adbProcess = execa(CONSTS.adb, ['-s', deviceID, ...args], {
     cleanup: true,
   });
