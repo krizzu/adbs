@@ -15,7 +15,7 @@ type ProcessedArgs = {
   adbArgs: Array<string>;
 };
 
-interface ExecaStream {
+interface ExecaStream extends Promise<any> {
   stdout: NodeStream;
   stdin: NodeStream;
   stderr: NodeStream;

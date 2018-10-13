@@ -2,7 +2,7 @@
 
 import log from './log';
 
-function help() {
+function help(): void {
   log.norm(`
     Usage
       $ adbs [adbs options] [adb command]
