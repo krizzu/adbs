@@ -3,6 +3,8 @@ import inquirer from 'inquirer';
 import CONSTS from './consts';
 import { getDevList } from './exec';
 
+type ProcessedArgsType = 'help' | 'version' | ProcessedArgs;
+
 // check if target is specifiec, slice commands
 function getAdbArgs(args: Array<string>): Array<string> {
   if (CONSTS.availableCommands.includes(args[0] as AvailableOptions))
@@ -53,11 +55,14 @@ async function pickTarget(args: Array<string>): Promise<string> {
 
 async function processArguments(
   args: Array<string>
-): Promise<'help' | ProcessedArgs> {
+): Promise<ProcessedArgsType> {
   if (!args.length || /help/.test(args[0]) || args[0] === '-h') {
     return 'help';
   }
 
+  if (/version/.test(args[0]) || args[0] === '-v') {
+    return 'version';
+  }
   const adbArgs = getAdbArgs(args);
   const target = (await pickTarget(args)) as AvailableTargets;
 
