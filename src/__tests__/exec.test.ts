@@ -1,24 +1,21 @@
-const { normalAdb, getDevList, execAdb } = require('../exec');
-
-const trueConsole = console;
+import { normalAdb, getDevList, execAdb } from '../exec';
 
 beforeEach(() => {
-  global.console = {
-    log: jest.fn(),
-  };
-});
-
-afterEach(() => {
-  global.console = trueConsole;
+  Object.assign(global, {
+    console: {
+      log: jest.fn(),
+    },
+  });
 });
 
 describe("exec's ", () => {
   describe('runNormalAdb', () => {
     it('pipes to stdio & stderr', done => {
       normalAdb(['shell']).then(() => {
-        const consoleCalls = global.console.log.mock.calls;
+        const mockedConsole: any = global.console.log;
+        const consoleCalls = mockedConsole.mock.calls;
 
-        expect(consoleCalls[0].length).toEqual(1);
+        expect(consoleCalls[0]).toHaveLength(1);
         expect(consoleCalls[0][0]).toHaveProperty('_isStdio', true);
         done();
       });
@@ -52,7 +49,7 @@ describe("exec's ", () => {
           'emulator-2212',
         ];
 
-        expect(devList.length).toBe(5);
+        expect(devList).toHaveLength(5);
         expect(devList).toEqual(expect.arrayContaining(expectedList));
         done();
       });
@@ -61,7 +58,7 @@ describe("exec's ", () => {
       getDevList('emu').then(devList => {
         const expectedList = ['emulator-3432', 'emulator-2212'];
 
-        expect(devList.length).toBe(2);
+        expect(devList).toHaveLength(2);
         expect(devList).toEqual(expect.arrayContaining(expectedList));
         done();
       });
@@ -70,14 +67,14 @@ describe("exec's ", () => {
       getDevList('dev').then(devList => {
         const expectedList = ['SQRLPD135523', 'BAM35334AR', 'DEEM32AR2'];
 
-        expect(devList.length).toBe(3);
+        expect(devList).toHaveLength(3);
         expect(devList).toEqual(expect.arrayContaining(expectedList));
         done();
       });
     });
     it('returns empty array if no devices', done => {
       getDevList(null).then(devList => {
-        expect(devList.length).toEqual(0);
+        expect(devList).toHaveLength(0);
 
         done();
       });

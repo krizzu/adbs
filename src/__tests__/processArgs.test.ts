@@ -1,4 +1,4 @@
-const processArgs = require('../processArgs');
+import processArgs from '../processArgs';
 
 describe('processArgs', () => {
   describe('runs help', () => {

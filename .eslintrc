@@ -1,5 +1,8 @@
 {
   "extends": "krizzu/ts",
+  "globals": {
+    "jest": true
+  },
   "rules": {
     "no-await-in-loop": 0,
     "no-console": 0
