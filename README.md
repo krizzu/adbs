@@ -1,37 +1,61 @@
+<h1 align="center">
+  <br>
+  <a href="https://github.com/Krizzu/adbs"><img src="assets/adbs.svg" alt="adbs" width="250"></a>
+  <br>
+</h1>
 
-<div align="center">
-  <img src="assets/adbs.png" style="margin-bottom: 30px" />
-  <p align="center" style="margin-bottom: 100px">
-    Seamless work with multiple Android devices using <a href="https://developer.android.com/studio/command-line/adb.html"><b>android debug bridge</b></a>.
-  </p>
-
-  <img style="width: 80%; height: 40%;" src="assets/adbsv3.gif" />
-</div>
-
-## Features:
-
-1. Helps distributing `adb` commands to multiple devices/emulators
-
-2. If more than one device/emulator is running, prompt will ask for target
-
-3. You can specify targets upfront (see [**Usage**](#usage))
-
-4. Can be used **interchangeably** with `adb`
+<h4 align="center">Seamless work with multiple Android devices using <a href="https://developer.android.com/studio/command-line/adb.html"><b>android debug bridge</b></a>.</h4>
 
 
+<p align="center">
 
-## Install
+  <image src="https://img.shields.io/npm/dt/adbs.svg" alt="download count">
+  <image src="https://img.shields.io/circleci/project/github/Krizzu/adbs.svg" alt="CI status" />
+  
+  <image src="https://img.shields.io/npm/v/adbs.svg" alt="package version">
 
-Install CLI globally
+  <a href="https://saythanks.io/to/Krizzu">
+      <img src="https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg">
+  </a>
+
+  <div align="center">
+    <img width=650 src="assets/adbsv3.gif" />
+  </div>
+  <br>
+</p>
+
+## About:
+
+[Android Debug Bridge](https://developer.android.com/studio/command-line/adb) is a versatile command-line tool that lets you communicate with a device. It's included in the Android SDK Platform-Tools package. Must-have tool while developing android apps.
+
+Although `adb` is great, it becomes a bit cumbersome when used with more than one android device (connected real phone/emulator to host). You have to specify a "target device", by providing it's unique device number.
+
+
+`adbs` ease this pain by giving you a nice UI for selecting "target device". Can be used interchangeably with `adb` itself.
+
+
+
+## Highlights:
+
+  - Helps distributing `adb` commands to multiple devices/emulators
+  - If more than one device/emulator is running, prompt will ask for target
+  - You can specify targets upfront (see [**Usage**](#usage))
+  - Can be used **interchangeably** with `adb`
+
+
+
+## Install:
+
+To install `adbs`, you'll need [Node.js](https://nodejs.org/en/download/) and one of package managers: [npm](https://www.npmjs.com/) (comes with node) or [yarn](https://yarnpkg.com/lang/en/docs/install/#mac-stable). Next, using command line:
 
 ```
-npm i -g adbs 
-
+$ npm install --global adbs 
 
 # or
 
-yarn global add adbs
+$ yarn global add adbs
 ```
+
 
 
 ## Usage
@@ -44,13 +68,14 @@ yarn global add adbs
     all                     Run commands on all devices
     dev                     Run commands on all physical devices
     emu                     Run commands on all running emulators
-    help    | -h             Displays this screen
+    help    | -h            Displays this screen
     version | -v            Display current adbs version
   
   Examples
     $ adbs all shell netstat
     $ adbs emu install app.apk
 ```
+
 
 
 ## License

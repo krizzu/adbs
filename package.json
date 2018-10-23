@@ -19,6 +19,12 @@
   "bin": {
     "adbs": "dist/cli.js"
   },
+  "homepage": "https://github.com/krizzu/adbs#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krizzu/adbs.git",
+    "docs": "https://github.com/Krizzu/adbs/blob/master/README.md"
+  },
   "main": "dist/cli.js",
   "types": "index.d.ts",
   "author": "Krzysztof 'Krizzu' Borowy",
