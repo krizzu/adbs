@@ -45,17 +45,17 @@ function execa(cmd, args) {
     });
   });
 
-  execaProcess.stdout = {
-    pipe,
-  };
+  Object.assign(execaProcess, {
+    stdout: { pipe },
+  });
 
-  execaProcess.stderr = {
-    pipe,
-  };
+  Object.assign(execaProcess, {
+    stderr: { pipe },
+  });
 
   return execaProcess;
 }
 
-execa.stdout = execa;
+Object.assign(execa, { stdout: execa });
 
 module.exports = execa;

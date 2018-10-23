@@ -1,0 +1,10 @@
+{
+  "extends": "krizzu/ts",
+  "globals": {
+    "jest": true
+  },
+  "rules": {
+    "valid-jsdoc": 0,
+    "import/no-unresolved": 0,
+  }
+}

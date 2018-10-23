@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es5",                     
+    "module": "commonjs",
+    "lib": [
+      "es2016",
+    ],                  
+    "outDir": "./dist",        
+    "rootDir": "./",           
+    "removeComments": true,    
+    "esModuleInterop": true,
+    "resolveJsonModule": true
+  },
+  "exclude": [
+    "__mocks__",
+    "**/__tests__/*"
+  ]
+}
