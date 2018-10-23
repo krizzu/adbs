@@ -1,6 +1,6 @@
 {
   "name": "adbs",
-  "version": "3.0.0-rc",
+  "version": "3.0.0",
   "description": "Seamless work with adb for multiple android devices.",
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
